@@ -24,9 +24,11 @@ For example:
 */
 class Solution {
 public:
+	
 	int characterToInt(char x){
 		return (x - 'A') + 1;
 	}
+	
     int titleToNumber(string s) {
 		int result = 0;
 		
@@ -36,8 +38,7 @@ public:
 			result += characterToInt(s[lastIndex - rIndex]) * pow(26,rIndex);  //for example, for AZ, we would do Z*(26^0) + A*(26*1)
 		}
 		
-		return result;
-        
+		return result;  
     }
 };
 
