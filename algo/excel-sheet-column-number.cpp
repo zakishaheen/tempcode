@@ -23,13 +23,13 @@ For example:
     AB -> 28 
 */
 class Solution {
+
 public:
-	
 	int characterToInt(char x){
 		return (x - 'A') + 1;
 	}
 	
-    int titleToNumber(string s) {
+    	int titleToNumber(string s) {
 		int result = 0;
 		
 		int lastIndex = s.length() - 1;
@@ -39,7 +39,7 @@ public:
 		}
 		
 		return result;  
-    }
+    	}
 };
 
 int main(int argc, char *argv[]) {
