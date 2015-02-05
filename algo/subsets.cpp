@@ -28,6 +28,17 @@ If S = [1,2,3], a solution is:
 
 
 using namespace std;
+
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+	
+	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Zaki Shaheen'; GIT_AUTHOR_EMAIL='zakishaheen@me.com'; GIT_COMMITTER_NAME='Zaki Shaheen'; GIT_COMMITTER_EMAIL='zakishaheen@me.com';" HEAD
+
+        
+    }
+};
+
 int main(int argc, char *argv[]) {
 	
 }
