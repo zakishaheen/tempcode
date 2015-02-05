@@ -4,6 +4,7 @@
 #include <utility>
 #include <cmath>
 #include <cassert>
+#include <unordered_map>
 
 using namespace std;
 
@@ -21,13 +22,13 @@ public:
 		
 		int result = 0;
 		
-		map<int,int> frequencyTable;
+		unordered_map<int,int> frequencyTable;
 		
 		for(auto element = num.begin(); element != num.end(); element++){
 			
 			auto elementValue =  *element;
 						
-			if(frequencyTable[elementValue]==0){
+			if(frequencyTable.find(elementValue)==frequencyTable.end()){
 				frequencyTable[elementValue] = 1;
 			} 
 			else {

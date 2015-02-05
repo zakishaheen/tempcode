@@ -5,6 +5,7 @@
 #include <stack>
 #include <deque>
 #include <cassert>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ public:
 		
 		//if you want to find an element in an array again and again, convert array into map like:
 		
-		map<int, vector<int> > hashmap;
+		unordered_map<int, vector<int> > hashmap;
 		
 		for(int i=0;i<numbers.size();i++){
 			vector<int> temp = hashmap[numbers[i]];
