@@ -5,6 +5,7 @@
 #include <stack>
 #include <deque>
 #include <cassert>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,48 +21,85 @@ struct TreeNode {
      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+
+
 class Solution {
 public:
+
+	TreeNode *buildTreeR(vector<int> &inorder, vector<int> &postorder, vector<int>::iterator inorderbegin, vector<int>::iterator inorderend, vector<int>::iterator postorderbegin, vector<int>::iterator postorderend){
+
+		
+		if(inorderbegin == inorderend){
+
+			TreeNode *head = new TreeNode(*inorderbegin);
+			head->left = NULL;
+			head->right = NULL;
+			
+			return head;
+		}else{
+
+			
+			int key = *postorderend;
+			TreeNode *head = new TreeNode(key);
+			head->left = NULL;
+			head->right = NULL;
+			
+			auto inorderkeyit = find(inorderbegin, inorderend, key);
+			auto leftinorderbegin = inorderbegin;
+			auto leftinorderend = inorderkeyit - 1;
+			vector<int>::iterator leftpostorderbegin = postorder.end();
+			vector<int>::iterator leftpostorderend = postorder.end();
+			int leftsize = distance(leftinorderbegin, leftinorderend);
+
+			if(leftinorderbegin == inorderkeyit){
+				head-> left = NULL; //first element hence no other on the left side. 
+				leftsize = 0;
+			}
+			else{
+				leftpostorderbegin = postorderbegin;
+				leftpostorderend = postorderbegin + leftsize;
+				
+				head->left = buildTreeR(inorder, postorder, leftinorderbegin, leftinorderend, leftpostorderbegin, leftpostorderend);
+			}
+			
+			
+			auto rightinorderbegin = inorderkeyit + 1;
+			auto rightinorderend = inorderend;
+			
+			vector<int>::iterator rightpostorderbegin;
+			vector<int>::iterator rightpostorderend;
+			
+			int rightsize = distance(rightinorderbegin, rightinorderend)+1;
+			
+			if(rightinorderend == inorderkeyit){
+				rightsize = 0;
+				//last element so no more elements on the right size
+				head->right = NULL;
+			}
+			else{
+				if(leftpostorderend == postorder.end()){
+					//there is no left size. 
+					rightpostorderbegin = postorderbegin;
+				}else{
+					rightpostorderbegin = leftpostorderend + 1;
+
+				}
+				
+				rightpostorderend = postorderend - 1;				
+				head->right = buildTreeR(inorder, postorder, rightinorderbegin, rightinorderend, rightpostorderbegin, rightpostorderend);
+			}
+			
+			
+			return head; 
+		}
+	}
+	
+	
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
 	
+		if(postorder.size()==0) return NULL;
 		
-		if(inorder.size()==0) return NULL;
-		
-		int X = postorder[postorder.size()-1];
-		
-		
-		TreeNode *head = new TreeNode(X);
-		
-		for(int i=0;i<inorder.size();i++){
-			if(inorder[i]==X){
-				vector<int> leftinorder; 
-				vector<int> rightinorder; 
-				vector<int> leftpostorder;
-				vector<int> rightpostorder;
-								
-				for(int j = 0;	j < i;j++){ leftinorder.push_back(inorder[j]); }
-				for(int j = i+1;j < inorder.size();j++){ rightinorder.push_back(inorder[j]); }
-				
-				int r = postorder.size() - 1;
-				for(int i=0;i<rightinorder.size();i++){
-					rightpostorder.push_back(postorder[--r]);
-				}
-				
-				for(int i=0;i<leftinorder.size();i++){
-					leftpostorder.push_back(postorder[--r]);
-				}
-				
-				TreeNode *left = buildTree(leftinorder, leftpostorder);
-				TreeNode *right = buildTree(rightinorder, rightpostorder);
-				
-				head->left = left;
-				head->right = right;
-				
-				return head;
-				
-			}
-		}
-		return NULL;
+		return buildTreeR(inorder, postorder, inorder.begin(), inorder.end() - 1, postorder.begin(), postorder.end() - 1);
     }
 };
 
@@ -83,11 +121,20 @@ int main(int argc, char *argv[]) {
 	TreeNode * n = s.buildTree(inorder, postorder);
 	assert(n==NULL);
 	
-	inorder.push_back(1);
-	postorder.push_back(1);
-	TreeNode * x = s.buildTree(inorder, postorder);
-	assert(x!=NULL);
-	print(x); cout<<endl;
+//	inorder.push_back(1);
+//	inorder.push_back(2);
+//	inorder.push_back(3);
+//	inorder.push_back(4);
+//	
+//	postorder.push_back(3);
+//	postorder.push_back(2);
+//	postorder.push_back(4);
+//	postorder.push_back(1);
+//		
+//	TreeNode * x = s.buildTree(inorder, postorder);
+//	assert(x!=NULL);
+//	print(x); cout<<endl;
+	
 	
 	
 	inorder.clear();
