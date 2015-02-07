@@ -21,7 +21,12 @@ struct TreeNode {
      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
+Given inorder and postorder traversal of a tree, construct the binary tree.
 
+Note:
+You may assume that duplicates do not exist in the tree.
+*/
 
 class Solution {
 public:
@@ -70,6 +75,7 @@ public:
 			vector<int>::iterator rightpostorderend;
 			
 			int rightsize = distance(rightinorderbegin, rightinorderend)+1;
+			
 			
 			if(rightinorderend == inorderkeyit){
 				rightsize = 0;
@@ -120,6 +126,7 @@ int main(int argc, char *argv[]) {
 	Solution s;
 	TreeNode * n = s.buildTree(inorder, postorder);
 	assert(n==NULL);
+
 	
 //	inorder.push_back(1);
 //	inorder.push_back(2);
@@ -139,7 +146,7 @@ int main(int argc, char *argv[]) {
 	
 	inorder.clear();
 	postorder.clear();
-	
+
 	inorder.push_back(1);
 	inorder.push_back(2);
 	inorder.push_back(3);
