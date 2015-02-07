@@ -17,6 +17,12 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+*/
 class Solution {
 public:
     TreeNode *buildTreeR(vector<int> &preorder, vector<int> &inorder, int preStart, int preEnd, int inStart, int inEnd){
