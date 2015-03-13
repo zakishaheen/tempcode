@@ -45,9 +45,9 @@ public:
 int main(int argc, char *argv[]) {
 	Solution s;
 	
-	assert(1 == s.titleToNumber("A"));
-	assert(26 == s.titleToNumber("Z"));
-	assert(27 == s.titleToNumber("AA"));
-	assert(52 == s.titleToNumber("AZ"));
-	assert(53 == s.titleToNumber("BA"));
+	cout<< s.titleToNumber("ABC");
+//	assert(26 == s.titleToNumber("Z"));
+//	assert(27 == s.titleToNumber("AA"));
+//	assert(52 == s.titleToNumber("AZ"));
+//	assert(53 == s.titleToNumber("BA"));
 }
