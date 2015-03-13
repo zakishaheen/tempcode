@@ -20,11 +20,7 @@ public:
         int left = 1 + maxDepth(root->left);
         int right = 1 + maxDepth(root->right);
         
-        if(left>right){
-            return left;
-        }else{
-            return right;
-        }
+        return max(left, right);
     }
 };
 
