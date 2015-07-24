@@ -7,6 +7,7 @@ INCOMPLETE
 #include <cassert>
 #include <iostream>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -29,25 +30,20 @@ public:
 		//build level order.
 		int currentLevel = 0;
 		
-		vector< vector<TreeNode *> > levels;
+		list<TreeNode*> s;
+		list<TreeNode*> t;
 		
-		vector<TreeNode *> rootLevel(1);
-		rootLevel.push_back(root);
+		list<TreeNode *> *currentVector = &s;
+		list<TreeNode *> *otherVector = &t;
 		
-		levels.push_back(rootLevel);
+		s.push_back(root);
 		
-		while(tree){
-			auto x = levels[currentLevel];
+		while(currentVector->size() > 0){
+			string output = "";
 			
-			for(auto i = x.begin(); i!=x.end(); i++){
-				auto nextVector = levels[currentLevel+1];
-				nextVector.push_back((*x)->left);
-				nextVector.push_back((*x)->right);
+			for(auto i = currentVector->begin(); i!=currentVector->end(); i++){
+				currentVector->remove(*i);
 			}
-			
-			currentLevel++;
-			
-			
 		}
 		
 		// check if each level is palindrome. 
